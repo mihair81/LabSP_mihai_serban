@@ -22,8 +22,23 @@ public class AppVisitor {
         stats.printStatistics();
 
         System.out.println();
+
+        // Table of contents pe o carte cu mai multe capitole
+        Book book = new Book("Noapte buna, copii!");
+        Section c1 = new Section("Capitolul 1");
+        c1.add(new Paragraph("Text 1"));
+        c1.add(new Paragraph("Text 2"));
+        Section c11 = new Section("Capitolul 1.1");
+        c11.add(new ImageProxy("Imagine"));
+        c1.add(c11);
+        Section c2 = new Section("Capitolul 2");
+        c2.add(new Table("Tabel"));
+        c2.add(new Paragraph("Text 3"));
+        book.addContent(c1);
+        book.addContent(c2);
+
         GenerateToC toc = new GenerateToC();
-        cap1.accept(toc);
+        book.accept(toc);
         toc.getToC().render();
     }
 }

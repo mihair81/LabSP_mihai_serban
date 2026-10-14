@@ -10,8 +10,8 @@ public class TableOfContents implements Element {
     public TableOfContents() {
     }
 
-    public void addEntry(String entry) {
-        entries.add(entry);
+    public void addEntry(String title, int page) {
+        entries.add(title + " ........ " + page);
     }
 
     public List<String> getEntries() {
