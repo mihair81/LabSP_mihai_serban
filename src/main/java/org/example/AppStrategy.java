@@ -15,7 +15,7 @@ public class AppStrategy {
 
         System.out.println("Printing without Alignment");
         System.out.println();
-        cap1.print();
+        cap1.accept(new RenderContentVisitor());;
 
         p1.setAlignStrategy(new AlignCenter());
         p2.setAlignStrategy(new AlignRight());
@@ -24,6 +24,6 @@ public class AppStrategy {
         System.out.println();
         System.out.println("Printing with Alignment");
         System.out.println();
-        cap1.print();
+        cap1.accept(new RenderContentVisitor());;
     }
 }

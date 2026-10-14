@@ -23,12 +23,16 @@ public class Paragraph implements Element {
         this.textAlignment = textAlignment;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         if (textAlignment == null) {
             System.out.println("Paragraph: " + text);
         } else {
             System.out.println(textAlignment.render(this, DEFAULT_CONTEXT));
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

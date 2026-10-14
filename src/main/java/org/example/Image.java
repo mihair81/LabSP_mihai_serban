@@ -40,8 +40,12 @@ public class Image implements Element, Picture {
         return "content of " + url;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         System.out.println("Image with name: " + url);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

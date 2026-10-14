@@ -25,13 +25,17 @@ public class Book {
         content.add(element);
     }
 
-    public void print() {
+    public void render() {
         System.out.println("Book: " + title);
         for (Author author : authors) {
             author.print();
         }
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
         for (Element element : content) {
-            element.print();
+            element.accept(visitor);
         }
     }
 }

@@ -19,12 +19,12 @@ public class AppProxy {
         System.out.println("Creation of the content took " + (endTime - startTime) + " milliseconds");
 
         startTime = System.currentTimeMillis();
-        playboyS1.print();
+        playboyS1.accept(new RenderContentVisitor());;
         endTime = System.currentTimeMillis();
         System.out.println("Printing of the section 1 took " + (endTime - startTime) + " milliseconds");
 
         startTime = System.currentTimeMillis();
-        playboyS1.print();
+        playboyS1.accept(new RenderContentVisitor());;
         endTime = System.currentTimeMillis();
         System.out.println("Printing again the section 1 took " + (endTime - startTime) + " milliseconds");
     }
