@@ -21,6 +21,6 @@ public class App {
         cap111.add(cap1111);
         cap1111.add(new Image("Image subchapter 1.1.1.1"));
 
-        noapteBuna.print();
+        noapteBuna.accept(new RenderContentVisitor());;
     }
 }

@@ -12,8 +12,12 @@ public class Table implements Element {
         this.something = something;
     }
 
-    @Override
-    public void print() {
+    public void render() {
         System.out.println("Table");
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

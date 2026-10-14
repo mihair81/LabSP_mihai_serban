@@ -1,19 +1,32 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TableOfContents implements Element {
 
-    // In diagrama atributul apare doar ca "something"
-    private String something;
+    private final List<String> entries = new ArrayList<>();
 
     public TableOfContents() {
     }
 
-    public TableOfContents(String something) {
-        this.something = something;
+    public void addEntry(String entry) {
+        entries.add(entry);
+    }
+
+    public List<String> getEntries() {
+        return entries;
+    }
+
+    public void render() {
+        System.out.println("Table of contents");
+        for (String entry : entries) {
+            System.out.println(" - " + entry);
+        }
     }
 
     @Override
-    public void print() {
-        System.out.println("Table of contents");
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }
