@@ -2,7 +2,7 @@ package org.example;
 
 public interface Element {
 
-    void print();
+    void accept(Visitor visitor);
 
     default void add(Element element) {
         throw new UnsupportedOperationException("Operatia add nu este suportata de " + getClass().getSimpleName());
