@@ -1,12 +1,24 @@
 package org.example;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
 import java.awt.Dimension;
 
-public class ImageProxy implements Element, Picture {
+@Entity
+public class ImageProxy extends BaseElement implements Picture {
 
-    private final String url;
-    private final Dimension dim = new Dimension(800, 600);
-    private Image realImage; // se creeaza doar cand e nevoie
+    private String url;
+
+    @Transient
+    private Dimension dim = new Dimension(800, 600);
+
+    // imaginea reala se creeaza doar cand e nevoie si nu se salveaza in baza de date
+    @Transient
+    private Image realImage;
+
+    protected ImageProxy() {
+    }
 
     public ImageProxy(String url) {
         this.url = url;
@@ -17,6 +29,10 @@ public class ImageProxy implements Element, Picture {
             realImage = new Image(url);
         }
         return realImage;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     @Override

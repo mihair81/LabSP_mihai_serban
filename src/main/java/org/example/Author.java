@@ -1,9 +1,23 @@
 package org.example;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
     private String surname;
+
+    // constructor implicit, cerut de JPA si de Jackson
+    protected Author() {
+    }
 
     // Primeste numele complet, ex: "Radu Pavel Gheo".
     // Ultimul cuvant devine surname, restul name.
@@ -22,6 +36,10 @@ public class Author {
     public Author(String name, String surname) {
         this.name = name;
         this.surname = surname;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {

@@ -1,11 +1,23 @@
 package org.example;
 
-public class Paragraph implements Element {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
+@Entity
+public class Paragraph extends BaseElement {
 
     private static final Context DEFAULT_CONTEXT = new Context(40);
 
+    @Column(length = 2000)
     private String text;
+
+    // strategia de aliniere nu se salveaza in baza de date
+    @Transient
     private AlignStrategy textAlignment;
+
+    protected Paragraph() {
+    }
 
     public Paragraph(String text) {
         this.text = text;
