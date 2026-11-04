@@ -1,11 +1,18 @@
 package org.example;
 
+import jakarta.persistence.Entity;
+
 import java.awt.Dimension;
 import java.util.concurrent.TimeUnit;
 
-public class Image implements Element, Picture {
+@Entity
+public class Image extends BaseElement implements Picture {
 
     private String url;
+
+    // constructor pentru JPA: nu simuleaza incarcarea imaginii
+    protected Image() {
+    }
 
     public Image(String url) {
         this.url = url;

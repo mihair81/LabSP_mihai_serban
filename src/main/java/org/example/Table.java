@@ -1,6 +1,10 @@
 package org.example;
 
-public class Table implements Element {
+import jakarta.persistence.Entity;
+
+// "Table" este cuvant rezervat in SQL, de aceea tabela se numeste TableElement
+@Entity(name = "TableElement")
+public class Table extends BaseElement {
 
     // In diagrama atributul apare doar ca "something"
     private String something;
@@ -10,6 +14,10 @@ public class Table implements Element {
 
     public Table(String something) {
         this.something = something;
+    }
+
+    public String getSomething() {
+        return something;
     }
 
     public void render() {

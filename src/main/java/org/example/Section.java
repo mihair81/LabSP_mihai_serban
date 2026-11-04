@@ -1,12 +1,22 @@
 package org.example;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Section implements Element {
+@Entity
+public class Section extends BaseElement {
 
     private String title;
-    private final List<Element> children = new ArrayList<>();
+
+    @OneToMany(targetEntity = BaseElement.class, cascade = CascadeType.ALL)
+    private List<Element> children = new ArrayList<>();
+
+    protected Section() {
+    }
 
     public Section(String title) {
         this.title = title;
@@ -18,6 +28,10 @@ public class Section implements Element {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Element> getChildren() {
+        return children;
     }
 
     public void render() {
