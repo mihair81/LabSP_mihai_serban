@@ -1,0 +1,6 @@
+package org.example.observer;
+
+public interface Observer<T> {
+
+    void update(T data);
+}

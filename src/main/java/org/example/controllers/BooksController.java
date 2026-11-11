@@ -7,6 +7,7 @@ import org.example.commands.DeleteBookCommand;
 import org.example.commands.GetAllBooksCommand;
 import org.example.commands.GetBookByIdCommand;
 import org.example.commands.UpdateBookCommand;
+import org.example.observer.AllBooksSubject;
 import org.example.persistence.CrudRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -26,10 +26,11 @@ import java.util.List;
 public class BooksController {
 
     private final CommandContext context;
+    private final AllBooksSubject allBooksSubject;
 
-    // Spring injecteaza repository-ul (prin adapter), iar controllerul il da mai departe in context
-    public BooksController(CrudRepository<Book, Integer> booksRepository) {
+    public BooksController(CrudRepository<Book, Integer> booksRepository, AllBooksSubject allBooksSubject) {
         this.context = new CommandContext(booksRepository);
+        this.allBooksSubject = allBooksSubject;
     }
 
     @GetMapping
@@ -45,9 +46,10 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> create(@RequestBody Book book) {
-        Book created = new CreateBookCommand(context).execute(book);
-        return ResponseEntity.created(URI.create("/books/" + created.getId())).body(created.getId());
+    public String newBook(@RequestBody Book newBook) {
+        Book book = new CreateBookCommand(context).execute(newBook);
+        allBooksSubject.add(book); // schimba starea subiectului si anunta observatorii
+        return "Book saved [" + book.getId() + "] " + book.getTitle();
     }
 
     @PutMapping("/{id}")
